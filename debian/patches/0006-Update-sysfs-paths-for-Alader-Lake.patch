@@ -1,0 +1,42 @@
+From d0c9e7fb5aea85b84841eba927feb8767765fda2 Mon Sep 17 00:00:00 2001
+From: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Date: Tue, 22 Jun 2021 08:44:44 -0700
+Subject: [PATCH 6/6] Update sysfs paths for Alader Lake
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Update sysfs path for INT3400 device.
+---
+ src/thd_engine_adaptive.cpp | 2 ++
+ src/thd_int3400.cpp         | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/src/thd_engine_adaptive.cpp b/src/thd_engine_adaptive.cpp
+index 20df937..247ca6c 100644
+--- a/src/thd_engine_adaptive.cpp
++++ b/src/thd_engine_adaptive.cpp
+@@ -1583,6 +1583,8 @@ int cthd_engine_adaptive::thd_engine_start(bool ignore_cpuid_check) {
+ 		int3400_base_path = "/sys/bus/platform/devices/INT3400:00/";
+ 	} else if (sysfs.exists("/sys/bus/platform/devices/INTC1040:00")) {
+ 		int3400_base_path = "/sys/bus/platform/devices/INTC1040:00/";
++	} else if (sysfs.exists("/sys/bus/platform/devices/INTC1041:00")) {
++		int3400_base_path = "/sys/bus/platform/devices/INTC1041:00/";
+ 	} else {
+ 		return THD_ERROR;
+ 	}
+diff --git a/src/thd_int3400.cpp b/src/thd_int3400.cpp
+index 4fabaee..a89f002 100644
+--- a/src/thd_int3400.cpp
++++ b/src/thd_int3400.cpp
+@@ -36,6 +36,8 @@ cthd_INT3400::cthd_INT3400(std::string _uuid) : uuid(_uuid), base_path("") {
+ 		base_path = "/sys/bus/acpi/devices/INT3400:00/physical_node/uuids/";
+ 	} else if (cdev_sysfs.exists("/sys/bus/acpi/devices/INTC1040:00/physical_node/uuids")) {
+ 		base_path = "/sys/bus/acpi/devices/INTC1040:00/physical_node/uuids/";
++	} else if (cdev_sysfs.exists("/sys/bus/acpi/devices/INTC1041:00/physical_node/uuids")) {
++		base_path = "/sys/bus/acpi/devices/INTC1041:00/physical_node/uuids/";
+ 	}
+ 	thd_log_info("INT3400 Base path is %s\n", base_path.c_str());
+ }
+-- 
+2.32.0
+

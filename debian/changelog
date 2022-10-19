@@ -1,0 +1,642 @@
+thermald (2.4.6-3) unstable; urgency=medium
+
+   * AlderLake CPU support (LP: #1942181)
+    - 0005-Add-AlderLake-cpu-model.patch
+    - 0006-Update-sysfs-paths-for-Alader-Lake.patch
+
+ -- Colin King <colin.king@canonical.com>  Mon, 31 Aug 2021 09:36:12 +0100
+
+thermald (2.4.6-2) unstable; urgency=medium
+
+   * Jasper Lake CPU support (LP: #1940629)
+     - 0001-Added-Jasper-Lake-CPU-model.patch
+
+ -- Colin King <colin.king@canonical.com>  Fri, 20 Aug 2021 15:46:15 +0100
+
+thermald (2.4.6-1) unstable; urgency=medium
+
+  * sync with latest upstream release 2.4.6:
+   - fix overheating Latitude 7400 (LP: #1930422)
+   - Use Adaptive PPCC limits for RAPL MMIO
+   - Increase power limit for disabled RAPL-MMIO
+   - Special case for default PSVT
+  * 2.4.5 fixes:
+   - Set a very high RAPL MSR PL1 with --adaptive
+
+ -- Colin King <colin.king@canonical.com>  Wed, 9 Jun 2021 16:58:23 +0100
+
+thermald (2.4.3-2) unstable; urgency=medium
+
+  * Disable some older legacy patches to keep thermald close to upstream
+    release, disable:
+    - 0002-Don-t-keep-on-reading-a-sensor-if-the-temperature-is.patch
+    - 0003-thermald-fix-uninitialised-member.patch
+    - 0004-Remove-processing-when-trip-was-not-activates.patch
+
+ -- Colin King <colin.king@canonical.com>  Tue, 8 Mar 2021 22:37:12 +0000
+
+thermald (2.4.3-1) unstable; urgency=medium
+
+  * sync with latest upstream release 2.4.3 (LP: #1917608)
+  * debian/rules remove "HERE" debug message
+
+ -- Colin King <colin.king@canonical.com>  Wed, 3 Mar 2021 10:42:47 +0000
+
+thermald (2.4.2-1) unstable; urgency=medium
+
+  * sync with latest upstream release 2.4.2
+
+ -- Colin King <colin.king@canonical.com>  Fri, 5 Feb 2021 16:10:23 +0000
+
+thermald (2.4.1-1) unstable; urgency=medium
+
+  * sync with latest upstream release 2.4.1
+   - drop patches that are in 2.4.1
+
+ -- Colin King <colin.king@canonical.com>  Thu, 10 Dec 2020 17:00:01 +0000
+
+thermald (2.3-5) unstable; urgency=medium
+
+  * Pull in latest upstream fixes:
+    [Benjamin Berg]
+    - 0009-adaptive-Improve-logging-of-high-order-Oem-condition.patch
+    - 0010-adaptive-Move-merging-dumping-out-of-gddv-parsing.patch
+    - 0011-adaptive-Properly-parse-data-vault-objects-recursive.patch
+    - 0012-adaptive-Log-name-of-unknown-condition-if-known.patch
+    - 0013-adaptive-Use-Oem0-constant-instead-of-19-which-is-le.patch
+    - 0014-adaptive-Implement-dummy-power-slider-condition.patch
+    - 0016-engine-Throw-different-errors-for-startup-issues.patch
+    - 0017-Use-special-exit-code-of-2-for-unsupported-platforms.patch
+    - 0018-data-Restart-systemd-service-on-failure.patch
+    [Srinivas Pandruvada]
+    - 0015-Added-Cometlake-and-Rocketlake-CPU-models.patch
+    - 0019-Allow-base-path-change-for-INT3400.patch
+
+ -- Colin King <colin.king@canonical.com>  Wed, 28 Oct 2020 17:16:34 +0000
+
+thermald (2.3-4) unstable; urgency=medium
+
+  * Fix Homepage field in debian/control (Closes: #971246)
+    - use https://01.org/linux-thermal-daemon
+
+ -- Colin King <colin.king@canonical.com>  Mon, 28 Sep 2020 09:55:23 +0100
+
+thermald (2.3-3) unstable; urgency=medium
+
+  * Add Cometlake and Rocketlake CPU models (LP: #1896419)
+    [Srinivas Pandruvada]
+    - 7f2003ee911d Added Cometlake and Rocketlake CPU models
+
+ -- Colin King <colin.king@canonical.com>  Mon, 21 Sep 2020 16:04:11 +0100
+
+thermald (2.3-2) unstable; urgency=medium
+
+  * Pull in latest upstream bug fixes to 2.3, patches 0005-0008*
+   [Benjamin Berg]
+    - 0710804c2c27 adaptive: Fix 64bit printing on non-64bit machines
+      Fixes FTBFS on 32 bit systems
+    - 8c283e472fa3 Fix path for Lenovo kill-switch heuristic
+      The path was missing the /sys prefix, rendering the test useless.
+      Add the appropriate prefix and also a comment explaining why we
+      do this.
+   [Srinivas Pandruvada]
+    - d14d4b69a4e8 Replace thd_log_fatal with thd_log_warn
+      Since --adaptive by default when parsing fails to revert to non
+      adaptive. But thd_log_fatal will cause it to exit. Instead display
+      warning and catch error and continue with non adaptive
+    - 32dc5502245b Continue for PSVT version != 2
+      Error out only when version is > 2.
+
+ -- Colin King <colin.king@canonical.com>  Tue, 8 Sep 2020 09:55:27 +0100
+
+thermald (2.3-1) unstable; urgency=medium
+
+  * sync with latest upstream release 2.3
+  * Debain/control: Add more dependencies
+
+ -- Colin King <colin.king@canonical.com>  Fri, 21 Aug 2020 09:26:11 +0100
+
+thermald (2.1-2) unstable; urgency=medium
+
+  * Debian/control: Add Rules-Requires-Root: no
+  * Debian/control: Reformat Build-Depends entries
+  * Debian/control: remove quilt from Build-Depends
+
+ -- Colin King <colin.king@canonical.com>  Sat, 4 Jul 2020 21:59:37 +0100
+
+thermald (2.1-1) unstable; urgency=medium
+
+  * sync with latest upstream release 2.1
+  * Add autoconf-archive to Build-Depends
+  * Add debhelper-compat (=12), remove debian/compat
+
+ -- Colin King <colin.king@canonical.com>  Tue, 12 May 2020 11:01:23 +0100
+
+thermald (1.9.1-1ubuntu1) groovy; urgency=medium
+
+  * Intel Tiger Lake support (LP: #1876066)
+
+ -- Alex Tu <alex.tu@canonical.com>  Thu, 30 Apr 2020 18:16:16 +0800
+
+thermald (1.9.1-1build1) focal; urgency=medium
+
+  * No-change rebuild for libgcc-s1 package name change.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sat, 21 Mar 2020 13:29:32 +0100
+
+thermald (1.9.1-1) unstable; urgency=medium
+
+  * sync with latest upstream release 1.9.1
+  * Add upstream fix:
+    - baed10762219 Fix debug information for cdev
+
+ -- Colin King <colin.king@canonical.com>  Sun, 15 Dec 2019 22:18:11 +0000
+
+thermald (1.9.0-1) unstable; urgency=medium
+
+  * sync with latest upstream release 1.9 (LP: #1838590)
+  * Add upstream fix:
+    - dcdaf523393a Use correct format specifier for size_t
+  * Update postinst, postrm, postpreinst rn_conffile package version
+  * Update debian/compat to 12
+
+ -- Colin King <colin.king@canonical.com>  Mon, 5 Aug 2019 09:12:15 +0100
+
+thermald (1.8.0-1) unstable; urgency=medium
+
+  * sync with latest upstream release 1.8
+  * remove some patches from previous release as they are all merged
+    into 1.8 and refresh the others to apply cleanly.
+  * Add upstream fixes:
+    - 99e51f3bed99 fix cdev state error while trip point is off
+    - bb7631163c8f Use correct format specifier for size_t
+  * Update compat to 11
+  * Clean up package-uses-old-debhelper-compat-version warning
+
+ -- Colin King <colin.king@canonical.com>  Fri, 19 Oct 2018 11:04:47 +0100
+
+thermald (1.7.0-8) unstable; urgency=medium
+
+  [ Eric S. Raymond ]
+  * manual: thermal-conf.xml.5: fix markup
+  [ Colin King ]
+  * manual: thermal-conf.xml.5: fix indentation of XML examples
+  * debian/changelog: remove extraneous trailing white spaces
+
+ -- Colin King <colin.king@canonical.com>  Tue, 19 Jun 2018 09:26:11 +0100
+
+thermald (1.7.0-7) unstable; urgency=medium
+
+  [ Srinivas Pandruvada ]
+  * Remove processing when trip was not activates
+    - When trip was not activated, don't poll cooling
+      device status. This will save some CPU cycles.
+  [ Colin King ]
+  * Remove extraneous line at end of debian/control
+
+ -- Colin King <colin.king@canonical.com>  Tue, 15 May 2018 10:15:15 +0100
+
+thermald (1.7.0-6) unstable; urgency=medium
+
+  [ Ben Caradoc-Davies ]
+  * Fix non-initialized temp_unreadable (Closes: #896132)
+    - fixes regression caused by previous fix, initialise
+      temp_unreadable to restore temperature control.
+
+ -- Colin King <colin.king@canonical.com>  Fri, 20 Apr 2018 02:08:23 +0100
+
+thermald (1.7.0-5) unstable; urgency=medium
+
+  * Don't continually re-read broken temperature sysfs file (LP: #1764320)
+    log once that is unreadble, thereafter don't re-read as this
+    will spam the log with read failure messages
+
+ -- Colin King <colin.king@canonical.com>  Tue, 17 Apr 2018 16:22:21 +0100
+
+thermald (1.7.0-4) unstable; urgency=medium
+
+  * Fix global-files-wildcard-not-first-paragraph-in-dep5-copyright
+
+ -- Colin King <colin.king@canonical.com>  Tue, 6 Mar 2018 09:46:19 +0000
+
+thermald (1.7.0-3) unstable; urgency=medium
+
+  * remove /etc/init/thermald.conf (Closes: #884589)
+  * clean up warning: thermald source: useless-autoreconf-build-depends
+    dh-autoreconf
+  * Update compat from 9 to 10
+  * Use debhelper >= 10
+
+ -- Colin King <colin.king@canonical.com>  Sun, 17 Dec 2017 14:04:24 +0000
+
+thermald (1.7.0-2) unstable; urgency=medium
+
+  [ Bryan Quigley ]
+  * Remove upstart support
+
+  [ Colin King ]
+  * Update Standards-Version to  4.1.2
+
+ -- Colin King <colin.king@canonical.com>  Mon, 11 Dec 2017 18:25:11 +0000
+
+thermald (1.7.0-1) unstable; urgency=medium
+
+  * sync with latest upstream release 1.7
+  * remove patches from previous release as
+    they are all merged into 1.7
+
+ -- Colin King <colin.king@canonical.com>  Fri, 20 Oct 2017 22:44:33 +0100
+
+thermald (1.6.0-5) unstable; urgency=medium
+
+  * Initialize lowest_valid_index to prevent SEGV
+    - upstream commit 18d6ca75bbc504a
+
+ -- Colin King <colin.king@canonical.com>  Fri, 7 Jul 2017 19:26:58 +0100
+
+thermald (1.6.0-4) unstable; urgency=medium
+
+  * Fix dbus re-init accessing deleted pointer
+    - upstream fix 9c5d8354dd8efff340
+  * Update Standards-Version to 4.0.0
+
+ -- Colin King <colin.king@canonical.com>  Fri, 30 Jun 2017 06:27:41 +0100
+
+thermald (1.6.0-3) unstable; urgency=medium
+
+  * Pull in a few upstream and Ubuntu fixes:
+    - remove duplicate assignment to critical_temp (minor code cleanup)
+    - thd_parse: check for xmlNodeListGetString NULL returns
+      fixes potential NULL ptr deference bug
+    - fix typo on field name default_prefernce
+    - Don't terminate thermald engine if thd_engine is null (LP: #1677427)
+      fixes segfault if SIGTERM occurs during startup.
+
+ -- Colin King <colin.king@canonical.com>  Fri, 21 Apr 2017 11:16:23 +0100
+
+thermald (1.6.0-2) unstable; urgency=medium
+
+  * set default preference to ENERGY_CONSERVE
+   - upstream fix 37a25879239466f2d096
+
+ -- Colin King <colin.king@canonical.com>  Thu, 6 Apr 2017 17:00:12 +0100
+
+thermald (1.6.0-1) unstable; urgency=medium
+
+  * sync with latest upstream release 1.6
+  * include 2 minor fixes for 1.6.0 to clean up build warnings
+    - thd_cdev: ensure _target_value is initialized
+    - fix build warning on i386 architecture builds
+
+ -- Colin King <colin.king@canonical.com>  Mon, 13 Mar 2017 16:00:02 +0000
+
+thermald (1.5.4-4) unstable; urgency=medium
+
+  * fix spamming of logs when writes file (LP: #1656528)
+    - patch from  Srinivas Pandruvada at Intel, not yet mainline
+
+ -- Colin King <colin.king@canonical.com>  Thu, 23 Feb 2017 09:26:23 +0000
+
+thermald (1.5.4-3) unstable; urgency=medium
+
+  * upstream fix 7f83ada8133 ("check for recv failure and ensure "
+    "buffer is null terminated")
+    - fixes potential buffer overrun
+  * upstream fix 53154fd496a ("Remove auto adjusted max temp")
+    - addresses aggressive over-throttling on some H/W (LP: #1600599)
+
+ -- Colin King <colin.king@canonical.com>  Fri, 10 Feb 2017 15:19:11 +0000
+
+thermald (1.5.4-2) unstable; urgency=medium
+
+  * upstream fix 9da073098f7 ("Fix added to improve modem throttling")
+    - handle crash at boot-up
+    - remove dependency on ofono
+    - remove hard-coding of sleep value
+    - enusre throttling works fine when ofono/RIL logs enabled
+
+ -- Colin King <colin.king@canonical.com>  Tue, 3 Jan 2017 09:11:00 +0000
+
+thermald (1.5.4-1) unstable; urgency=medium
+
+  * sync with latest upstream release
+    - remove all debian/patches as these are now in the 1.5.4 release
+    - add depends on lsb-base (>= 3.0-6)
+
+ -- Colin King <colin.king@canonical.com>  Mon, 31 Oct 2016 10:22:11 -0600
+
+thermald (1.5.3-3) unstable; urgency=medium
+
+  * Minor upstream fix and add in model throttling for SoFIA-3GR:
+    - thd_cdev_modem: ensure private variables in class are
+      initialized.  throttling and online are not initialized, so
+      set the appropriately in the constructor.
+    - Added support for modem throttling on SoFIA-3GR:
+      Added modem as a cooling device for PA (coretemp4) on 3GR.
+      While temp would be read from sysfs device files, cooling
+      would be initiated through telephony framework, via D-Bus.
+      Telephony framework would notify thermald via D-Bus signals,
+      any change in throttling state.
+      thermald would invoke D-Bus methods in telephony framework
+      ONLY to check if its supported and to change the state.
+
+ -- Colin King <colin.king@canonical.com>  Thu, 21 Jul 2016 08:22:36 +0100
+
+thermald (1.5.3-2) unstable; urgency=medium
+
+  * Fix spelling mistake in thermal-conf man page (Closes: #826178)
+    - change "confirms" to "conforms"
+
+ -- Colin King <colin.king@canonical.com>  Fri, 3 Jun 2016 08:23:11 +0100
+
+thermald (1.5.3-1) unstable; urgency=medium
+
+  * Sync source to upstream 1.5.3 head
+  * Remove debian patches that are now merged into 1.5.3
+    - 0001-Initialize-bios_locked-to-false.patch
+    - 0002-Regression-for-default-config-file.patch
+  * Downgrade logging error (commit 8280fd7ec6cff6db6463c8a1b01d2e427e418226)
+    - When there are no relationship tables present, we print error.
+      This causes confusion. So downgrade error as thermald will continue
+      to use its defaults.
+
+ -- Colin King <colin.king@canonical.com>  Thu, 26 May 2016 11:37:39 +0100
+
+thermald (1.5-3) unstable; urgency=medium
+
+  * Update Standards-Version to 3.9.8
+  * Fix incorrect path to thermald config file (LP: #1568123)
+    - upstream commit 4a890d7e173678644882e6b863f3650e30d33052
+
+ -- Colin King <colin.king@canonical.com>  Fri, 29 Apr 2016 07:07:57 +0000
+
+thermald (1.5-2) unstable; urgency=medium
+
+  * Initialise bios_locked; may lead to random behaviour (LP: #1547594)
+    - bios_locked should be initialised to false so that RAPL is
+      enabled by default.
+
+ -- Colin King <colin.king@canonical.com>  Fri, 19 Feb 2016 17:08:36 +0000
+
+thermald (1.5-1) unstable; urgency=medium
+
+  * Sync with upstream 1.5 release
+    - remove debain/patches as these are all in the upstream release now
+
+ -- Colin King <colin.king@canonical.com>  Thu, 18 Feb 2016 00:17:12 +0000
+
+thermald (1.4.3-6) unstable; urgency=medium
+
+  * Fix frequency scaling issue on specific Intel CPUs (LP: #1480349)
+    - roll earlier patches that allow us to cleanly patch the issue
+    - Error recovery when sysfs attrib read fails
+    - Remove wild card for loading
+    - Move parser init to thd_engine
+    - Add white list of the cpu ids
+
+ -- Colin King <colin.king@canonical.com>  Tue, 26 Jan 2016 10:15:11 +0000
+
+thermald (1.4.3-5) unstable; urgency=medium
+
+  * cdev: turn some info messages to debug to reduce syslog spamming
+  * cdev: RAPL: turn some info messages to debug to reduce syslog spamming
+
+ -- Colin King <colin.king@canonical.com>  Fri, 21 Aug 2015 11:48:00 -0700
+
+thermald (1.4.3-4) unstable; urgency=medium
+
+  * Fix null pointer deferences with _ART active trip points (LP: #1480821)
+  * Re-enable lockfile (LP:# 1480892)
+  * Report multiple instances of thermald with thd_log_fatal (LP: #1432220)
+
+ -- Colin King <colin.king@canonical.com>  Mon, 3 Aug 2015 18:47:00 +0100
+
+thermald (1.4.3-3) unstable; urgency=medium
+
+  * Suppress systemd failed service messages (e.g. on VMs) (LP:#1480182)
+
+ -- Colin King <colin.king@canonical.com>  Fri, 31 Jul 2015 09:45:12 +0100
+
+thermald (1.4.3-2) unstable; urgency=medium
+
+  [Colin Ian King]
+  * Fix typo in option --ignore-cpuid-check
+  * Fix spelling mistake in man page
+  * Fix spelling mistake in README
+  [Martin Pitt]
+  * Fix postinst
+
+ -- Colin King <colin.king@canonical.com>  Tue, 28 Jul 2015 09:58:00 +0100
+
+thermald (1.4.3-1) unstable; urgency=medium
+
+  * Correct the version number
+  * cthd_engine::user_delete_zone: remove unused variable zone
+  * Remove unused variables
+  * Use correct format specifiers for size_t type
+  * Remove this_option_optind, it is not used and is redundant
+  * Don't assign a value to c if we don't use it again
+  * Fix type warning found by static analysis
+  * Reduce printing of "skip to reduce current state .."
+  * Removing several deprecated warning with new glib
+  * Fix marshalling array error
+  * Fix regression in exit via dbus message
+  * shell script update
+  * Added interface GetSensorTemperature
+  * New DBUS message to get sensor temperature at a given index.
+
+ -- Colin King <colin.king@canonical.com>  Thu, 16 Jul 2015 09:26:00 +0100
+
+thermald (1.4.2-1) unstable; urgency=medium
+
+  * Sync up with version 1.4.2
+  * Remove 0003-Fix-Coverity-reported-issues.patch, no longer required
+
+ -- Colin King <colin.king@canonical.com>  Thu, 9 Jul 2015 14:59:12 +0100
+
+thermald (1.4-1) unstable; urgency=medium
+
+  * Sync up with version 1.4
+
+ -- Colin King <colin.king@canonical.com>  Mon, 11 May 2015 09:53:11 +0100
+
+thermald (1.3-9) unstable; urgency=medium
+
+  * Fix buffer overrun on a readlink
+
+ -- Colin King <colin.king@canonical.com>  Fri, 13 Feb 2015 13:13:13 +0000
+
+thermald (1.3-8) unstable; urgency=medium
+
+  * Handle exit on H/W that does not support thermald (LP:#1325142)
+
+ -- Colin King <colin.king@canonical.com>  Fri, 5 Dec 2014 11:09:44 +0000
+
+thermald (1.3-7) unstable; urgency=medium
+
+  * Remove redundant re-checking of return from read_msr()
+  * Improve accuracy of unit_value calculation
+  * Null terminate buffer on error return path
+  * Fix resource leak on file descriptor, close fd on error return paths
+
+ -- Colin King <colin.king@canonical.com>  Wed, 3 Dec 2014 09:25:11 +0000
+
+thermald (1.3-6) unstable; urgency=medium
+
+  * data: thermald.conf: start only at runlevels 2,3,4,5 (LP: #1294895)
+
+ -- Colin King <colin.king@canonical.com>  Thu, 25 Sep 2014 11:37:00 +0100
+
+thermald (1.3-5) unstable; urgency=medium
+
+  * Fix RT Linux lockup with x86 package temp driver (Closes: #761290)
+
+ -- Colin King <colin.king@canonical.com>  Mon, 15 Sep 2014 09:27:00 +0100
+
+thermald (1.3-4) unstable; urgency=medium
+
+  * Fix assumption about hwmon0 (LP: #1366541)
+  * Use correct nfds to not rely on memset 0 to pollfds
+
+ -- Colin King <colin.king@canonical.com>  Tue, 9 Sep 2014 16:32:00 +0100
+
+thermald (1.3-3) unstable; urgency=medium
+
+  * Use correct i386 and amd64 architecture names
+
+ -- Colin King <colin.king@canonical.com>  Wed, 6 Aug 2014 19:05:00 +0100
+
+thermald (1.3-2) unstable; urgency=medium
+
+  * Fix man page formatting
+
+ -- Colin King <colin.king@canonical.com>  Wed, 6 Aug 2014 14:11:00 +0100
+
+thermald (1.3-1) unstable; urgency=medium
+
+  * Sync up with version 1.3
+
+ -- Colin King <colin.king@canonical.com>  Mon, 28 Jul 2014 09:39:34 +0100
+
+thermald (1.2-1) unstable; urgency=medium
+
+  * Adjust for coretemp path change
+  * Deny non root users to send system bus dbus messages
+  * Remove compile warning
+  * Remove rpmlint warning for manual page
+  * Remove old patches that are now included into version 1.2
+  * Sync up with version 1.2
+
+ -- Colin King <colin.king@canonical.com>  Mon, 19 May 2014 12:41:22 +0100
+
+thermald (1.1~rc2-12) unstable; urgency=medium
+
+  * Deny non root users to send system bus dbus messages (LP: #1314527)
+
+ -- Colin King <colin.king@canonical.com>  Wed, 30 Apr 2014 09:30:21 +0100
+
+thermald (1.1~rc2-11) unstable; urgency=medium
+
+  [Srinivas Pandruvada]
+  * Fix Kclockwork issue: gettext bounds
+  * Fix klockworks issue with strcasecmp NULL param
+  * Fix klockworks double free complaints
+  * Don't skip the current cdev
+  * Fix klocworks issue with memleak
+
+ -- Colin King <colin.king@canonical.com>  Tue, 18 Mar 2014 10:55:11 +0000
+
+thermald (1.1~rc2-10) unstable; urgency=medium
+
+  [Colin Ian King]
+  * coverity scan: fix memory leak on trip_ptr
+  * coverity scan: fix leaking dir on error exit path
+  [Srinivas Pandruvada]
+  * coverity scan: fix Unrecoverable parse warning
+  * coverity scan: Untrusted loop bound
+  * coverity scan: Uninitialized scalar field errors
+
+ -- Colin King <colin.king@canonical.com>  Wed, 12 Mar 2014 10:03:33 +0000
+
+thermald (1.1~rc2-9) unstable; urgency=medium
+
+  * Fix up some memory leaks in !THD_SUCCESS branches
+  * cthd_engine: guard against negative array indexes
+  * csys_fs: fix fd leaks in lseek error return path
+  * cthd_engine: remove redundant reads of thermal zone
+  * thd_engine.cpp: use %u intead of %d for signed integers
+  * thd_model.cpp: use correct integer format specifiers
+  * thd_model.cpp: remove ununsed variable 'file'
+  * thd_parse.cpp: use correct unsigned integer format specifiers
+  * thd_engine.cpp: check fcntl non-blocking error return
+  * fix leak of trip_ptr in read_trip_points
+  * ensure device_path is null terminated
+  * get_preference_cstr: return C string allocated on heap
+
+ -- Colin King <colin.king@canonical.com>  Tue, 11 Mar 2014 09:23:00 +0000
+
+thermald (1.1~rc2-8) unstable; urgency=medium
+
+  [Simon McVittie <smcv@debian.org>]
+  * Add a patch to install thermald to ${sbindir} without needing a
+    workaround in debian/rules, and have the systemd service file
+    use that path automatically
+  * Install the systemd service file (Closes: #738719)
+  * Activate hardening via DEB_BUILD_MAINT_OPTIONS instead of
+    hardening-wrapper
+  * Add patches to improve the systemd service
+  * Use dh-systemd to sync up enabledness status between sysvinit and systemd
+  [Colin King]
+  * Use __cpuid rather than use inline asm, simplifies i386 PIC builds
+
+ -- Colin King <colin.king@canonical.com>  Wed, 12 Feb 2014 11:49:37 +0000
+
+thermald (1.1~rc2-7) unstable; urgency=low
+
+  * Redirect fd 0, 1, 2 to /dev/null to stop poll() spinning (Closes: #737093)
+  * Add upstream commit; Prevent exception for invalid sysfs file reads
+
+ -- Colin King <colin.king@canonical.com>  Tue, 11 Feb 2014 08:06:33 +0000
+
+thermald (1.1~rc2-6) unstable; urgency=low
+
+  * Add upstream commit: Remove warning for non Intel processor
+  * Add upstream commit: Fix checking for cooling_device
+  * Add upstream commit: Fix compenstion using "Processor" thermal cooling device
+  * Re-work PIC ebx workaround
+
+ -- Colin King <colin.king@canonical.com>  Tue, 4 Feb 2014 10:00:01 +0000
+
+thermald (1.1~rc2-5) unstable; urgency=low
+
+  * Fix up exit() to use standard EXIT_* macros
+  * Fix log messages that don't have a trailing newline at end
+  * Minor re-ordering of PIC ebx pop
+  * Upstart conf: handle exit failures to avoid re-running forever
+
+ -- Colin King <colin.king@canonical.com>  Thu, 30 Jan 2014 11:21:00 +0000
+
+thermald (1.1~rc2-4) unstable; urgency=low
+
+  * Fix FTBFS, remove quilt from dh line
+
+ -- Colin King <colin.king@canonical.com>  Fri, 10 Jan 2014 17:25:29 +0000
+
+thermald (1.1~rc2-3) unstable; urgency=low
+
+  * Correctly rename man pages, fixes FTBFS (Closes: #734786)
+  * Apply buggy thermal zone trip index fix (Closes: #734832)
+
+ -- Colin King <colin.king@canonical.com>  Fri, 10 Jan 2014 11:34:53 +0000
+
+thermald (1.1~rc2-2) unstable; urgency=low
+
+  * Fix i386 PIC ebx clobbering with cpuid
+
+ -- Colin King <colin.king@canonical.com>  Thu, 9 Jan 2014 18:52:01 +0000
+
+thermald (1.1~rc2-1) unstable; urgency=low
+
+  * Initial Debian Release (Closes: #734615)
+
+ -- Colin King <colin.king@canonical.com>  Mon, 6 Jan 2014 12:05:23 +0000
